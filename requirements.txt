@@ -3,4 +3,3 @@ Telethon>=1.36
 aiohttp>=3.9
 cryptography>=42
 qrcode>=7.4
-qrcode>=7.4

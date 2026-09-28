@@ -3,51 +3,39 @@ __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-
-# Virtual environments
-venv/
 .venv/
-env/
-ENV/
+venv/
 
 # Secrets
 .env
 .env.*
+!.env.example
 *.key
 *.pem
-secrets/
-secret/
+*.p12
 credentials/
-config.local.*
+secrets/
 
-# Telegram sessions
+# Telegram auth
 *.session
 *.session-journal
-sessions/
+
+# Runtime data
+00_SYSTEM/
 01_SESSIONS/
-
-# Runtime / local data
-data/
-runtime/
-05_RUNTIME/
-02_MEDIA/TEMP/
+02_MEDIA/
 03_BACKUPS/
+04_LOGS/
+05_RUNTIME/
 
-# Databases
+# Databases/logs
 *.db
 *.sqlite
 *.sqlite3
-
-# Logs
 *.log
-logs/
-04_LOGS/
 
-# IDE
+# IDE / OS
 .vscode/
 .idea/
-
-# OS
 .DS_Store
 Thumbs.db
-!.env.example

@@ -1,54 +1,83 @@
 # Serv00 Deployment
 
-This project is prepared to run from persistent storage on Serv00.
+Telegram Master stores its runtime data in persistent local storage by default.
 
-## 1. Create the project directory
+## 1. Install Python environment
 
-```bash
-mkdir -p ~/TelegramMaster
-```
-
-Copy the repository files into that directory.
-
-## 2. Create a virtual environment
+Create a virtual environment in your home directory:
 
 ```bash
 mkdir -p ~/.virtualenvs
 virtualenv ~/.virtualenvs/telegram-master -p /usr/local/bin/python3.11
 ```
 
-Install the core dependencies:
+Install the application dependencies:
 
 ```bash
 ~/.virtualenvs/telegram-master/bin/pip install -r ~/TelegramMaster/requirements.txt
 ```
 
-For Google Drive support:
+Google Drive is optional. When enabled, install the extra dependencies:
 
 ```bash
 ~/.virtualenvs/telegram-master/bin/pip install -r ~/TelegramMaster/requirements-drive.txt
 ```
 
-## 3. Configure environment variables
+## 2. Environment variables
 
-Put the required environment variables in your shell profile, or provide them through your chosen process-management method.
+Required:
 
-Minimum configuration:
-
-```bash
-export TELEGRAM_API_ID="..."
-export TELEGRAM_API_HASH="..."
-export TELEGRAM_BOT_TOKEN="..."
-export TELEGRAM_REMOTE_BOT_TOKEN="..."
-export TELEGRAM_REMOTE_ADMIN_IDS="123456789"
+```text
+TELEGRAM_API_ID
+TELEGRAM_API_HASH
+TELEGRAM_BOT_TOKEN
+TELEGRAM_REMOTE_BOT_TOKEN
+TELEGRAM_REMOTE_ADMIN_IDS
 ```
 
-Do not place real credentials in the Git repository.
+Optional:
 
-## 4. Run
+```text
+TELEGRAM_BACKUP_CHANNEL
+TELEGRAM_2FA_VAULT_KEY
+TELEGRAM_DEVICE_MODEL
+TELEGRAM_SYSTEM_VERSION
+TELEGRAM_DATA_DIR
+```
+
+Google Drive (optional):
+
+```text
+GOOGLE_DRIVE_ENABLED=1
+GOOGLE_DRIVE_FOLDER_ID=...
+GOOGLE_SERVICE_ACCOUNT_JSON=...
+```
+
+or:
+
+```text
+GOOGLE_SERVICE_ACCOUNT_JSON_B64=...
+```
+
+Never commit real secrets to Git.
+
+## 3. Application layout
+
+```text
+~/TelegramMaster/
+├── 00_SYSTEM/
+├── 01_SESSIONS/
+├── 02_MEDIA/
+├── 03_BACKUPS/
+├── 04_LOGS/
+└── 05_RUNTIME/
+```
+
+## 4. Start manually
 
 ```bash
-~/TelegramMaster/scripts/start_serv00.sh
+cd ~/TelegramMaster
+./scripts/start_serv00.sh
 ```
 
 ## 5. Run in the background
@@ -57,34 +86,18 @@ Do not place real credentials in the Git repository.
 screen -dmS telegram-master ~/TelegramMaster/scripts/start_serv00.sh
 ```
 
-Attach to it with:
+Attach to the process:
 
 ```bash
 screen -r telegram-master
 ```
 
-Detach without stopping the process with `Ctrl+A`, then `D`.
+Detach without stopping the application with `Ctrl+A`, then `D`.
 
-## 6. Storage
+## 6. Start after reboot
 
-By default the application stores persistent data in:
+A cron entry can launch the application through `screen`, for example:
 
-```text
-~/TelegramMaster/
+```cron
+@reboot /usr/local/bin/bash -lc 'screen -dmS telegram-master $HOME/TelegramMaster/scripts/start_serv00.sh'
 ```
-
-The application creates its runtime directories automatically.
-
-## 7. Google Drive
-
-Google Drive is no longer required for the Serv00 edition. Local persistent storage is the default.
-
-To enable Drive as a secondary persistence layer:
-
-```bash
-export GOOGLE_DRIVE_ENABLED=1
-export GOOGLE_DRIVE_FOLDER_ID="..."
-export GOOGLE_SERVICE_ACCOUNT_JSON='...'
-```
-
-Install `requirements-drive.txt` before enabling it.
