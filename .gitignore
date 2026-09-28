@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+secrets/
+secret/
+credentials/
+config.local.*
+
+# Telegram sessions
+*.session
+*.session-journal
+sessions/
+01_SESSIONS/
+
+# Runtime / local data
+data/
+runtime/
+05_RUNTIME/
+02_MEDIA/TEMP/
+03_BACKUPS/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
+04_LOGS/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
