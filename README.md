@@ -1,5 +1,7 @@
 # Telegram Master
 
+[![Python Check](https://github.com/Theupx/Telegram-Master/actions/workflows/python-check.yml/badge.svg)](https://github.com/Theupx/Telegram-Master/actions/workflows/python-check.yml)
+
 > Multi-account Telegram automation built with **Telethon** and **aiogram**.
 
 Telegram Master is a Telegram automation project focused on managing persistent user sessions, controlling multiple accounts, providing a remote admin interface, handling account login flows, saving media, tracking activity, and supporting optional cloud persistence.
