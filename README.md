@@ -224,4 +224,4 @@ This allows the current modular version to remain clean while preserving the ear
 
 ## 📄 License
 
-A license has not been selected yet.
+MIT
